@@ -16,19 +16,19 @@ CREATE TABLE users_roles (
   user_id               bigint not null,
   role_id               int not null,
   primary key (user_id, role_id),
-  foreign key (user_id) references users (id),
-  foreign key (role_id) references roles (id)
+  foreign key (user_id) references user (id),
+  foreign key (role_id) references role (id)
 );
 
-insert into roles (name)
+insert into role (name)
 values
 ('ROLE_USER'), ('ROLE_ADMIN'), ('SOMETHING');
 
-insert into users (username, password, email)
+insert into user (username, password, email)
 values
 ('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@gmail.com');
 
-insert into users_roles (user_id, role_id)
+insert into user_role (user_id, role_id)
 values
 (1, 1),
 (1, 2);
