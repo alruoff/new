@@ -11,7 +11,12 @@ import java.util.List;
 
 @RestController
 public class MainController {
-    // private UserService userService;
+    private final UserService userService;
+
+    public MainController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("/")
     public String homePage() { return "home"; }
     @GetMapping("/registration")
@@ -33,10 +38,10 @@ public class MainController {
     public String adminPage() {
         return "admin";
     }
-//    @GetMapping("/users")
-//    public String findAll(Model model){
-//        List<User> usrs = userService.getAllUsers();
-//        model.addAttribute("users", usrs);
-//        return "user-list";
-//    }
+    @GetMapping("/users")
+    public String findAll(Model model){
+        List<User> usrs = userService.getAllUsers();
+        model.addAttribute("users", usrs);
+        return "login";
+    }
 }

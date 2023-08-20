@@ -25,11 +25,6 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-//    @Autowired
-//    public void setUserRepository(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
-
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
@@ -45,5 +40,5 @@ public class UserService implements UserDetailsService {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
-    // public List<User> getAllUsers() { return userRepository.findAll();}
+    public List<User> getAllUsers() { return userRepository.findAll(); }
 }

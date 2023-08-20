@@ -12,8 +12,8 @@
         <table>
             <thead>
             <tr>
-                <th>Id</th>
-                <th>User name</th>
+                <th>id</th>
+                <th>Username</th>
                 <th>Password</th>
                 <th>email</th>
             </tr>
@@ -21,7 +21,7 @@
             <tbody>
             <tr th:each="member : ${users}">
                 <td th:text="${member.id}"></td>
-                <td th:text="${member.userame}"></td>
+                <td th:text="${member.username}"></td>
                 <td th:text="${member.password}"></td>
                 <td th:text="${member.email}"></td>
                 <td><a th:href="@{user-update/{id}(id=${member.id})}">Edit</a></td>

@@ -8,7 +8,7 @@ spring:
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
-    show-sql: true
+    show-sql: false
 #    properties:
 #      hibernate:
 #        dialect: org.hibernate.dialect.PostgreSQL95Dialect
@@ -19,4 +19,6 @@ spring:
     url: jdbc:mysql://localhost:3306/springsecurity
     username: root
     password: kObOx_326
-
+#  thymeleaf:
+#    enabled: true
+#    check-template-location: true

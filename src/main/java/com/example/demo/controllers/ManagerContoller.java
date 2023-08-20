@@ -19,7 +19,7 @@ public class ManagerContoller {
     @GetMapping("/view")
     public String viewTestPage(Principal principal) {
         // Authentication a = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByUsername(principal.getName()).orElseThrow(() -> new RuntimeException("unable to fing user by username: " + principal.getName()));
+        User user = userService.findByUsername(principal.getName()).orElseThrow(() -> new RuntimeException("unable to find user by username: " + principal.getName()));
         return "authenticated: " + user.getUsername() + " : " + user.getEmail();
     }
 }
