@@ -12,7 +12,6 @@ import java.util.List;
 @RestController
 public class MainController {
     private final UserService userService;
-
     public MainController(UserService userService) {
         this.userService = userService;
     }
@@ -39,9 +38,9 @@ public class MainController {
         return "admin";
     }
     @GetMapping("/users")
-    public String findAll(Model model){
+    public List<User> findAll(Model model){
         List<User> usrs = userService.getAllUsers();
         model.addAttribute("users", usrs);
-        return "login";
+        return usrs;
     }
 }

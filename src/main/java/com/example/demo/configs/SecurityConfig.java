@@ -23,8 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/registration").hasRole("USER")    // только для USER
                 .antMatchers("/authenticated/**").authenticated() // только идентиф. пользователи
-                .antMatchers("/view").hasAnyRole("MANAGER")
-                .antMatchers("/admin/**").hasAnyRole("ADMIN","SUPERADMIN") // хотя бы одну из этих ролей
+                .antMatchers("/view").hasAnyRole("MANAGER", "USER")
+                .antMatchers("/","/admin/**","/newcustomer").hasAnyRole("ADMIN","SUPERADMIN") // хотя бы одну из этих ролей
                 .antMatchers("/profile/**").authenticated() // в профайлы заходят только идентиф. пользователи
                 .antMatchers("/users").authenticated()
                 .anyRequest().permitAll() // все прочие запросы общедоступны
@@ -33,6 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()// стандартная форма для логина .loginPage("/login")
                 .and()
                 .logout().logoutSuccessUrl("/"); // после logout попадаем в корень
+
+        http.csrf().disable(); // разрешаем POST-запросы без _csrf
     }
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {

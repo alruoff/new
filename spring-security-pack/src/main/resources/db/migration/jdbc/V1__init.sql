@@ -7,11 +7,11 @@ create table users (
 create table authorities (
     username varchar(255) not null,
     authority varchar(255) not null,
-    foreign key (username) references user (username),
+    foreign key (username) references user (login),
     unique (username, authority)
 );
 
-insert into user (username, password, enabled) values
+insert into user (login, password, enabled) values
 ('admin1', '{bcrypt}$2y$12$mFUdPh8.ESnhu.eyDjxrYuSigUIOboDP94mt7vuNhf604Yw0iuKQa', true);
 
 insert into authorities (username, authority) values ('admin1', 'ROLE_ADMIN');

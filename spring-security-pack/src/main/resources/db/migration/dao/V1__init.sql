@@ -24,7 +24,7 @@ insert into role (name)
 values
 ('ROLE_USER'), ('ROLE_ADMIN'), ('SOMETHING');
 
-insert into user (username, password, email)
+insert into user (login, password, email)
 values
 ('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@gmail.com');
 
