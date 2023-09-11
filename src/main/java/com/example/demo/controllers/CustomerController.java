@@ -6,6 +6,8 @@ import com.example.demo.services.CustomerService;
 import com.example.demo.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -18,13 +20,14 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping ("/newcustomer")
-    public Customer createNewCustomer(  @RequestParam(name="fullname") String fullname,
-                                        @RequestParam(name="login") String login,
-                                        @RequestParam(name="email") String email,
-                                        @RequestParam(name="role") String role ) {
+    public ResponseEntity createNewCustomer(@RequestParam(name="fullname") String fullname,
+                                            @RequestParam(name="login") String login,
+                                            @RequestParam(name="email") String email,
+                                            @RequestParam(name="role") String role ) {
 
        // User user = userService.findByUsername(principal.getName()).orElseThrow(() -> new RuntimeException("unable to find user by username: " + principal.getName()));
 
-        return customerService.createNewCustomer(fullname, login ,email, role);
+        customerService.createNewCustomer(fullname, login ,email, role);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 }

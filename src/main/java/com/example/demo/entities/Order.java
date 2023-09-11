@@ -13,9 +13,22 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinTable(name = "technology",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id"))
-    private Technology technology;
+    private String name; // имя заказа
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Customer owner; // менеджер, ведущий заказ
+
+    private String declaration; // общая информация о заказе из Приложения
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Technology techno; // технологич. цепочка, по которой заказ будет выполняться
+
+    private Boolean is_active;
 }
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinTable(name = "technology",
+//            joinColumns = @JoinColumn(name = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "id"))
+//    private Technology technology;
+

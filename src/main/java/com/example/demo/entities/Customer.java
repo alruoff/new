@@ -12,15 +12,15 @@ public class Customer {
     private Long id;
     private String fullName; // иное, чем логин
     private Boolean is_blocked;
-
     private LocalDateTime created_at;
-
     private LocalDateTime updated_at;
     private String email;
     private String position;
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
     private User user;
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
     public Customer(String name, Boolean is_blocked, LocalDateTime created_at,
                     LocalDateTime updated_at, String email, String position, User user) {
         this.fullName = name;

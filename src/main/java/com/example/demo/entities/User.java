@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,22 +18,28 @@ public class User {
     private String password;
 
     @ManyToMany
-    @JoinTable(name = "user_role ",
+    @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable (name = "customer_id")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public User() {
     }
+
     public User(String login, String password, Collection<Role> roles) {
         this.login = login;
         this.password = password;
         this.roles = roles;
     }
+
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }

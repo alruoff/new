@@ -1,5 +1,6 @@
 package com.example.demo.configs;
 import com.example.demo.services.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,12 +11,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
+
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private UserService userService;
-    @Autowired
-    public void setUserDetailsService(UserService userService) {
-        this.userService = userService;
-    }
+
+    private final UserService userService;
+//    @Autowired
+//    public void setUserDetailsService(UserService userService) {
+//        this.userService = userService;
+//    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -24,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/registration").hasRole("USER")    // только для USER
                 .antMatchers("/authenticated/**").authenticated() // только идентиф. пользователи
                 .antMatchers("/view").hasAnyRole("MANAGER", "USER")
-                .antMatchers("/","/admin/**","/newcustomer").hasAnyRole("ADMIN","SUPERADMIN") // хотя бы одну из этих ролей
+                .antMatchers("/","/admin/**","/newcustomer").hasAnyRole("ADMIN") // может быть несколько ролей
                 .antMatchers("/profile/**").authenticated() // в профайлы заходят только идентиф. пользователи
                 .antMatchers("/users").authenticated()
                 .anyRequest().permitAll() // все прочие запросы общедоступны
